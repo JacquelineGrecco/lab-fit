@@ -2,7 +2,7 @@ import pandas as pd
 import pandasql as ps
 import joblib
 
-
+# Parte I
 def get_patient_infos(df, patient_id):
     query_ex1 = """ 
                 SELECT 
@@ -27,10 +27,12 @@ if __name__ == '__main__':
     
     df = pd.read_csv(dict_filename)
     df['donation_date'] =  pd.to_datetime(df['donation_date'], format='%Y-%m-%d')
+    
+    # Patient id como exemplo: 0 
     df = get_patient_infos(df, 0)
     df = df.astype(int)
     
-    
+    # Parte II
     model = joblib.load(model_filename) 
     pred_cols = list(df.columns.values)[:-1]
     pred = pd.Series(model.predict(df[pred_cols]))
